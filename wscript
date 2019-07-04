@@ -84,6 +84,7 @@ def configure(ctx):
     ctx.recurse('gen')
     ctx.recurse('config')
     ctx.load('zcm-gen')
+    ctx.load('strip_on_install')
 
     ctx.env.configuredEnv = []
 
@@ -401,12 +402,15 @@ def build(ctx):
     ctx.recurse('config')
     ctx.recurse('gen')
     ctx.recurse('tools')
+    ctx.recurse('DEBIAN')
     generate_signature(ctx)
 
     ctx.add_group()
 
     # RRR (Tom) can't do this ... tis a catch 22
     # ctx.recurse('test')
+    
+    ctx.install_as('${PREFIX}/share/doc/zcm/copyright', 'LICENSE')
 
 def distclean(ctx):
     ctx.exec_command('rm -f examples/waftools/*.pyc')
