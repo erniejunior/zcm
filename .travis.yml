@@ -1,11 +1,30 @@
 language: c
 dist: bionic
-sudo: required
-before_install:
-  - sudo apt-get update -y
-  - sudo apt-get install -y libzmq3-dev libelf-dev cxxtest openjdk-8-jdk build-essential python-dev python3-dev cython cython3 pkg-config clang fakeroot
+
+addons:
+  apt:
+    update: true
+    packages:
+    - libzmq3-dev
+    - libelf-dev
+    - cxxtest
+    - openjdk-8-jdk
+    - build-essential
+    - python-dev
+    - python3-dev
+    - cython
+    - cython3
+    - pkg-config 
+    - clang 
+    - fakeroot
+
+install:
+  - curl https://julialang-s3.julialang.org/bin/linux/x64/1.0/julia-1.0.3-linux-x86_64.tar.gz | tar xz
+  - export PATH=$PATH:`pwd`/julia-1.0.3/julia/bin
 
 script:
+    - ./waf distclean configure --use-all --use-third-party --use-clang --use-cxxtest 
+    - ./waf build
     - scripts/make_debian_package.sh
 
 deploy:
