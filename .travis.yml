@@ -4,7 +4,8 @@ dist: bionic
 before_install:
   - sudo apt-get update
   - sudo apt-get install -y libzmq3-dev libelf-dev cxxtest openjdk-8-jdk build-essential python-dev python3-dev cython cython3 pkg-config clang fakeroot
-  - curl https://julialang-s3.julialang.org/bin/linux/x64/1.0/julia-1.0.3-linux-x86_64.tar.gz | tar xz
+  - wget https://julialang-s3.julialang.org/bin/linux/x64/1.0/julia-1.0.3-linux-x86_64.tar.gz
+  - tar -xaf julia-1.0.3-linux-x86_64.tar.gz
   - export PATH=$PATH:`pwd`/julia-1.0.3/julia/bin
 
 script:
