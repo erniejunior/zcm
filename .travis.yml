@@ -1,6 +1,9 @@
 language: c
 dist: bionic
 
+git:
+  depth: 1
+
 before_install:
   - sudo apt-get update
   - sudo apt-get install -y libzmq3-dev libelf-dev cxxtest openjdk-8-jdk build-essential python-dev python3-dev cython cython3 pkg-config clang fakeroot
@@ -9,8 +12,8 @@ before_install:
   - export PATH=$PATH:`pwd`/julia-1.0.3/bin
 
 script:
-    - ./waf distclean configure --use-all --use-third-party --use-clang --use-cxxtest 
-    - ./waf build
+    - ./waf distclean configure --use-all --use-third-party --use-clang --use-cxxtest
+    - ./waf build # TODO: add building examples and tests here
     - scripts/make_debian_package.sh
 
 deploy:
