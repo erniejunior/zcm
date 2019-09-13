@@ -283,7 +283,7 @@ def attempt_use_third_party(ctx):
 
 def attempt_use_clang(ctx):
     ctx.load('clang-custom')
-    ctx.env.CLANG_VERSION = ctx.assert_clang_version(3.6)
+    ctx.env.CLANG_VERSION = ctx.assert_clang_version((3, 6))
     ctx.env.variantsEnabledByConfigure.extend(['asan', 'examples_asan', 'tests_asan'])
     ctx.env.variantsEnabledByConfigure.extend(['tsan', 'examples_tsan', 'tests_tsan'])
     return True
@@ -415,8 +415,8 @@ def build(ctx):
         ctx.recurse('config')
         ctx.recurse('gen')
         ctx.recurse('tools')
-   	ctx.recurse('DEBIAN')
-	ctx.install_as('${PREFIX}/share/doc/zcm/copyright', 'LICENSE')
+        ctx.recurse('DEBIAN')
+        ctx.install_as('${PREFIX}/share/doc/zcm/copyright', 'LICENSE')
         generate_signature(ctx)
 
 
